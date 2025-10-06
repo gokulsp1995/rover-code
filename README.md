@@ -174,22 +174,6 @@ python3 app.py
 
 ---
 
-## 📈 Development Timeline
-
-```mermaid
-gantt
-    title MANN-E Rover Development
-    dateFormat  YYYY-MM-DD
-    section Infrastructure
-    Initial Setup           :done, 2025-05-01, 10d
-    Serial Communication    :done, 2025-05-05, 5d
-    section Features
-    Manual Control          :done, 2025-05-11, 7d
-    Sensor Fusion          :done, 2025-05-15, 10d
-    Computer Vision        :done, 2025-05-20, 8d
-    Autonomous Navigation  :done, 2025-05-25, 12d
-    section Testing
-    Sand Testing           :done, 2025-06-05, 5d
 
 ## 🎥 Media & Demos
 
