@@ -1,23 +1,14 @@
-# A-ORT
 
-Connect the Pi and the laptop to the same wifi
 
-In PuTTy, type: raspberrypi.local
+UKSEDS Olympus Rover Trials 
 
-ssh gokul@<pi_ip_address>
-cd ~/Desktop/MANN-E/
-
-In terminal, run:  python app.py
-
-UKSEDS Olympus Rover Trials 🛰️
-
-⭐ Overview
+ Overview
 
 Welcome to the repository for the MANN-E Rover system, a custom-built planetary rover developed for the UKSEDS Olympus Rover Trials.
 
 This project represents the complete software stack for an autonomous and remotely operated rover prototype. The system integrates advanced hardware control, sensor fusion (IMU + Encoders), a Flask-based web control interface, and a robust computer vision pipeline for environmental interaction.
 
-⚙️ Key Features & Technical Stack
+ Key Features & Technical Stack
 
 The rover's architecture relies on Python 3 for high-level control and Arduino C++ for low-level motor/sensor management, communicating via serial.
 Feature Area	Key Functionality	Core Files & Technology
@@ -27,7 +18,9 @@ Sensor Fusion	Processing data from the IMU and wheel encoders to calculate the r
 Computer Vision	System for real-time video streaming, camera servo control, and OpenCV detection of mission-critical QR codes.	qr.py, camera_scan_controller.py, servo_cam.py
 System Interface	Handles the essential communication (Serial/I2C) and system health checks.	serial_comm.py, heartbeat.py
 
-🛠️ Setup and Installation
+<img width="1280" height="800" alt="rover" src="https://github.com/user-attachments/assets/c37ebeb1-6d72-45ad-b963-1364806cb4b6" />
+
+ Setup and Installation
 
 Prerequisites
 
@@ -44,8 +37,8 @@ Getting Started
     Clone the Repository:
     Bash
 
-git clone [YOUR_REPO_URL_HERE]
-cd MANN-E_Rover
+git clone https://github.com/gokulsp1995/rover-code.git
+cd rover-code
 
 Install Python Dependencies:
 Bash
@@ -53,7 +46,6 @@ Bash
 # Run this command on your Raspberry Pi
 pip3 install flask opencv-python-headless RPi.GPIO smbus
 
-(Note: A formal requirements.txt is recommended for future development.)
 
 Run the Flask Server:
 Bash
@@ -63,7 +55,7 @@ Bash
 
     Access the control interface from your laptop's browser: http://<your_pi_ip_address>:5000
 
-💡 Development Milestones
+ Development Milestones
 
 The following is an overview of the key development steps and their corresponding files, as tracked in the project's commit history:
 File	Commit Message	Highlighted Feature
@@ -74,16 +66,25 @@ encoders.py, imu.py, hardware.py	Absolute distance + Roll, Pitch	Integrated IMU 
 data/, .gitignore, camera_feed.py, serial_comm.py, style.css, index.html	initial commit pi	Established basic project structure, web components, and serial communication.
 hardware.py, imu.py	July 11th / Functional rover without automation	Stable manual control established and robust sensor reading validation.
 
-🖼️ Media & External Links
+ Media & External Links
 
     Watch the Sand Testing: See the rover in action at the Airbus testing facility!
 
     Documentation: [Link to your project documentation (if applicable)]
 
-🤝 Contribution and Contact
+ Contribution and Contact
 
 For questions or collaboration, please open an issue in this repository.
 
-    Project Lead: [Your Name/Team Lead Name]
-
     Contribute: Feel free to fork the repository and submit a pull request!
+
+Notes{
+Connect the Pi and the laptop to the same wifi
+
+In PuTTy, type: raspberrypi.local
+
+ssh gokul@<pi_ip_address>
+cd ~/Desktop/MANN-E/
+
+In terminal, run:  python app.py
+}
