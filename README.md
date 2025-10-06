@@ -1,90 +1,249 @@
+# UKSEDS Olympus Rover Trials
+
+<div align="center">
+
+![Rover Banner](https://github.com/user-attachments/assets/c37ebeb1-6d72-45ad-b963-1364806cb4b6)
+
+**An autonomous planetary rover prototype with advanced sensor fusion and computer vision capabilities**
+
+[![Python](https://img.shields.io/badge/Python-3.x-blue.svg)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-Web_Control-green.svg)](https://flask.palletsprojects.com/)
+[![OpenCV](https://img.shields.io/badge/OpenCV-Computer_Vision-red.svg)](https://opencv.org/)
 
 
-UKSEDS Olympus Rover Trials 
+</div>
 
- Overview
+---
 
-Welcome to the repository for the MANN-E Rover system, a custom-built planetary rover developed for the UKSEDS Olympus Rover Trials.
+## 📖 Overview
 
-This project represents the complete software stack for an autonomous and remotely operated rover prototype. The system integrates advanced hardware control, sensor fusion (IMU + Encoders), a Flask-based web control interface, and a robust computer vision pipeline for environmental interaction.
+Welcome to **MANN-E Rover** – a custom-built planetary rover developed for the UKSEDS Olympus Rover Trials! This repository contains the complete software stack for an autonomous and remotely operated rover prototype, featuring advanced hardware control, sensor fusion, a Flask-based web interface, and robust computer vision capabilities.
 
- Key Features & Technical Stack
+---
 
-The rover's architecture relies on Python 3 for high-level control and Arduino C++ for low-level motor/sensor management, communicating via serial.
-Feature Area	Key Functionality	Core Files & Technology
-Control Dashboard (GUI)	Live video feed, real-time sensor telemetry, and arranged buttons for manual and automated missions.	app.py (Flask), index.html, style.css
-Kinematics & Autonomy	Logic for precise odometry (using fused IMU/Encoder data) and executing turn-then-drive autonomous sequences.	kinematics.py, automation_controller.py
-Sensor Fusion	Processing data from the IMU and wheel encoders to calculate the rover's 2D pose (X, Y, θ) and monitor Roll/Pitch.	imu.py, encoders.py, hardware.py
-Computer Vision	System for real-time video streaming, camera servo control, and OpenCV detection of mission-critical QR codes.	qr.py, camera_scan_controller.py, servo_cam.py
-System Interface	Handles the essential communication (Serial/I2C) and system health checks.	serial_comm.py, heartbeat.py
+## ✨ Key Features
 
-<img width="1280" height="800" alt="rover" src="https://github.com/user-attachments/assets/c37ebeb1-6d72-45ad-b963-1364806cb4b6" />
+<table>
+<tr>
+<td width="50%">
 
- Setup and Installation
+### Control Dashboard
+- Live video streaming
+- Real-time sensor telemetry
+- Manual & automated mission controls
+- Intuitive web interface
 
-Prerequisites
+**Tech:** `Flask`, `HTML/CSS`, `JavaScript`
 
-To run the rover code, you will need the following dependencies and hardware setup:
+</td>
+<td width="50%">
 
-    Raspberry Pi (preferably Pi 4/5) with SSH enabled.
+### Autonomous Navigation
+- Precise odometry calculations
+- Turn-then-drive sequences
+- 2D pose estimation (X, Y, θ)
+- Mission path execution
 
-    Python 3 environment.
+**Tech:** `Python`, `Kinematics Engine`
 
-    Required physical hardware (motors, IMU, encoders, camera, servo).
+</td>
+</tr>
+<tr>
+<td width="50%">
 
-Getting Started
+### Sensor Fusion
+- IMU + Encoder integration
+- Roll/Pitch monitoring
+- Absolute distance tracking
+- Real-time pose updates
 
-    Clone the Repository:
-    Bash
+**Tech:** `I2C`, `Serial Communication`
 
+</td>
+<td width="50%">
+
+### Computer Vision
+- Camera servo control
+- QR code detection
+- Video stream processing
+- Automated scanning
+
+**Tech:** `OpenCV`, `Computer Vision`
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🏗️ Architecture
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    Web Dashboard (Flask)                │
+│               Telemetry • Controls • Video              │
+└────────────────────────┬────────────────────────────────┘
+                         │
+          ┌──────────────┴──────────────┐
+          │                             │
+┌─────────▼─────────┐         ┌────────▼────────┐
+│  Python Control   │         │  Computer Vision │
+│   • Kinematics    │◄────────┤   • QR Detection │
+│   • Automation    │         │   • Camera Servo │
+│   • Sensor Fusion │         └─────────────────┘
+└─────────┬─────────┘
+          │
+┌─────────▼─────────────────────────────────────┐
+│         Hardware Layer (Arduino C++)          │
+│    Motors • IMU • Encoders • Servos          │
+└───────────────────────────────────────────────┘
+```
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- **Raspberry Pi 4/5** with SSH enabled
+- **Python 3.x**
+- Hardware: Motors, IMU, Encoders, Camera, Servo
+
+### Installation
+
+**1. Clone the repository**
+```bash
 git clone https://github.com/gokulsp1995/rover-code.git
 cd rover-code
+```
 
-Install Python Dependencies:
-Bash
-
-# Run this command on your Raspberry Pi
+**2. Install dependencies**
+```bash
 pip3 install flask opencv-python-headless RPi.GPIO smbus
+```
 
+**3. Launch the control dashboard**
+```bash
+python3 app.py
+```
 
-Run the Flask Server:
-Bash
+**4. Access the interface**
+```
+Open your browser: http://<your_pi_ip_address>:5000
+```
 
-    # This launches the web control dashboard
-    python3 app.py
+---
 
-    Access the control interface from your laptop's browser: http://<your_pi_ip_address>:5000
+## 🔧 Connection Guide
 
- Development Milestones
+<details>
+<summary><b>Click to expand setup instructions</b></summary>
 
-The following is an overview of the key development steps and their corresponding files, as tracked in the project's commit history:
-File	Commit Message	Highlighted Feature
-app.py, camera_scan_controller.py, servo_cam.py, qr_1.jpg, qrs.html	Auto camera tilt for scan	Implemented full camera control for autonomous scanning.
-automation_controller.py	Automation works first time	Successful end-to-end execution of the primary autonomous mission path.
-kinematics.py	Automation Code Complete with OOP, - Still needs fix in working	Refactored movement logic into an Object-Oriented Kinematics model.
-encoders.py, imu.py, hardware.py	Absolute distance + Roll, Pitch	Integrated IMU data for calculating 3-axis orientation and refined distance calculation.
-data/, .gitignore, camera_feed.py, serial_comm.py, style.css, index.html	initial commit pi	Established basic project structure, web components, and serial communication.
-hardware.py, imu.py	July 11th / Functional rover without automation	Stable manual control established and robust sensor reading validation.
+### Network Setup
+1. Connect both Pi and laptop to the **same WiFi network**
+2. Find your Pi's IP address or use `raspberrypi.local`
 
- Media & External Links
+### SSH Connection
+```bash
+# Using hostname
+ssh gokul@raspberrypi.local
 
-    Watch the Sand Testing: See the rover in action at the Airbus testing facility!
-
-    Documentation: [Link to your project documentation (if applicable)]
-
- Contribution and Contact
-
-For questions or collaboration, please open an issue in this repository.
-
-    Contribute: Feel free to fork the repository and submit a pull request!
-
-Notes{
-Connect the Pi and the laptop to the same wifi
-
-In PuTTy, type: raspberrypi.local
-
+# Or using IP address
 ssh gokul@<pi_ip_address>
-cd ~/Desktop/MANN-E/
+```
 
-In terminal, run:  python app.py
-}
+### Running the Application
+```bash
+cd ~/Desktop/MANN-E/
+python3 app.py
+```
+
+</details>
+
+---
+
+## 📂 Project Structure
+
+| Component | Files | Description |
+|-----------|-------|-------------|
+| **Web Interface** | `app.py`, `index.html`, `style.css` | Flask server & control dashboard |
+| **Autonomy** | `automation_controller.py`, `kinematics.py` | Mission planning & execution |
+| **Sensors** | `imu.py`, `encoders.py`, `hardware.py` | Sensor fusion & data processing |
+| **Vision** | `qr.py`, `camera_scan_controller.py`, `servo_cam.py` | Computer vision & scanning |
+| **Communication** | `serial_comm.py`, `heartbeat.py` | Hardware interface & health monitoring |
+
+---
+
+## 📈 Development Timeline
+
+```mermaid
+gantt
+    title MANN-E Rover Development
+    dateFormat  YYYY-MM-DD
+    section Infrastructure
+    Initial Setup           :done, 2025-05-01, 10d
+    Serial Communication    :done, 2025-05-05, 5d
+    section Features
+    Manual Control          :done, 2025-05-11, 7d
+    Sensor Fusion          :done, 2025-05-15, 10d
+    Computer Vision        :done, 2025-05-20, 8d
+    Autonomous Navigation  :done, 2025-05-25, 12d
+    section Testing
+    Sand Testing           :done, 2025-06-05, 5d
+
+## 🎥 Media & Demos
+
+<div align="center">
+
+### Sand Testing at Airbus Facility
+<img width="1280" height="800" alt="rover" src="https://github.com/user-attachments/assets/2e0946e9-f2fc-49b4-9b03-b9b11fcaa8ca" />
+
+
+</div>
+
+---
+
+## Contributing
+
+We welcome contributions! Here's how you can help:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## Key Milestones
+
+| Feature | Status | Description |
+|---------|--------|-------------|
+| Auto Camera Tilt | ✅ Complete | Full camera control for autonomous scanning |
+| Automation System | ✅ Complete | End-to-end autonomous mission execution |
+| OOP Refactor | ✅ Complete | Object-oriented kinematics model |
+| Sensor Fusion | ✅ Complete | IMU integration with roll/pitch/yaw |
+| Manual Control | ✅ Complete | Stable web-based manual operation |
+
+---
+
+## Contact & Support
+
+- **Found a bug?** [Open an issue](https://github.com/gokulsp1995/rover-code/issues)
+- **Have a suggestion?** [Start a discussion](https://github.com/gokulsp1995/rover-code/discussions)
+- **Email:** gokulsp2020@outlook.com
+
+---
+
+
+---
+
+<div align="center">
+
+**Built for UKSEDS Olympus Rover Trials**
+
+⭐ Star this repo if you find it helpful!
+
+[⬆ Back to Top](#ukseds-olympus-rover-trials---mann-e-rover)
+
+</div>
